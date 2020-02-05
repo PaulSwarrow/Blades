@@ -1,9 +1,10 @@
 using System.Collections.Generic;
+using Game;
 using UnityEngine;
 
 namespace CharacterSystem.Controllers
 {
-    public class UserCharacterController : MonoBehaviour
+    public class UserCharacterController : BaseGameController
     {
         private class KeyListener
         {
@@ -35,13 +36,17 @@ namespace CharacterSystem.Controllers
 
         private void Awake()
         {
+        }
+
+        public override void Init()
+        {
             motionMap[listeners[0].hash] = new Motion
             {
                 trigger = CharacterAnimator.ForceAttack
             };
         }
 
-        private void Update()
+        public override void Tick(float deltaTime)
         {
             target.context.input.Move = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
             target.context.input.Move = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
@@ -53,6 +58,10 @@ namespace CharacterSystem.Controllers
             }
 
             Debug.Log(context.keysLog);
+        }
+
+        public override void Dispose()
+        {
         }
 
         private void UpdateContext(InputContext context)
