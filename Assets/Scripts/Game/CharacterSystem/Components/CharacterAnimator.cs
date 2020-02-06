@@ -21,6 +21,11 @@ namespace CharacterSystem
             animator = GetComponent<Animator>();
         }
 
+        public Transform GetBone(HumanBodyBones boneId)
+        {
+            return animator.GetBoneTransform(HumanBodyBones.Neck);
+        }
+
 
         public void ApplyContext(CharacterContext context)
         {

@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     {
         controllers = GetComponents<BaseGameController>();
         map = new GenericMap<BaseGameController>(controllers);
-        controllers.Foreach(controller => controller.Init());
+        controllers.Foreach(controller => controller.Init(this));
     }
 
     void Start()
@@ -28,5 +28,10 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         controllers.Foreach(controller => controller.Tick(Time.deltaTime));
+    }
+
+    public T Controller<T>() where T: BaseGameController
+    {
+        return map.Get<T>();
     }
 }

@@ -7,11 +7,17 @@ namespace CharacterSystem
     {
         public CharacterContext context;
         private CharacterAnimator animator;
+        public object body;
 
         private void Awake()
         {
             animator = GetComponent<CharacterAnimator>();
             animator.ApplyContext(context);
+        }
+
+        public Transform GetBone(HumanBodyBones boneId)
+        {
+            return animator.GetBone(boneId);
         }
     }
 }

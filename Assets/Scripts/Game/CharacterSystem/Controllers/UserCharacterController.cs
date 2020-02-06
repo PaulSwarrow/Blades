@@ -24,7 +24,7 @@ namespace CharacterSystem.Controllers
             public int keysLog;
         }
 
-        [SerializeField] private CharacterEntity target;
+        [SerializeField] public CharacterEntity target;
 
         public class Motion
         {
@@ -34,11 +34,8 @@ namespace CharacterSystem.Controllers
         private Dictionary<int, Motion> motionMap = new Dictionary<int, Motion>();
         private InputContext context = new InputContext();
 
-        private void Awake()
-        {
-        }
 
-        public override void Init()
+        public override void Init(GameManager gameManager)
         {
             motionMap[listeners[0].hash] = new Motion
             {

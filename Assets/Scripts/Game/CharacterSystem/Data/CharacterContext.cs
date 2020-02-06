@@ -1,4 +1,5 @@
 using System;
+using Cinemachine;
 
 namespace CharacterSystem.Data
 {
@@ -7,6 +8,6 @@ namespace CharacterSystem.Data
     {
         public CharacterInput input;
         public PhysicsContext physics;
-        
+        public GameCameraMode cameraMode;
     }
 }
