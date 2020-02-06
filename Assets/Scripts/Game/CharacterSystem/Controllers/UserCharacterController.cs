@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using CharacterSystem.Data;
 using Game;
 using UnityEngine;
 
@@ -37,6 +38,7 @@ namespace CharacterSystem.Controllers
 
         public override void Init(GameManager gameManager)
         {
+            base.Init(gameManager);
             motionMap[listeners[0].hash] = new Motion
             {
                 trigger = CharacterAnimator.ForceAttack
@@ -45,16 +47,33 @@ namespace CharacterSystem.Controllers
 
         public override void Tick(float deltaTime)
         {
-            target.context.input.Move = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-            target.context.input.Move = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
-            UpdateContext(context);
+            var move = new Vector3(Input.GetAxis("Horizontal"),0, Input.GetAxis("Vertical"));
+            if (target.context.cameraMode == GameCameraMode.Shoulder)
+            {
+                target.context.input.Move = move;
+                target.context.input.LookDrirection =
+                    Quaternion.Euler(0, Input.GetAxis("Mouse X"), 0) * target.transform.forward;
+                
+            }
+            else
+            {
+                move = manager.Controller<CameraController>().TransformVector(move);
+                Debug.Log(move);
+                Debug.DrawRay(target.transform.position, move*10, Color.blue);
+                target.context.input.Move = Vector3.forward * move.magnitude;
+                target.context.input.LookDrirection = move;
+            }
+            
+            
             if (GetMotionTrigger(context, out var motion))
             {
                 target.context.input.AnimationTrigger = motion.trigger;
             }
+            
+            
 
-            Debug.Log(context.keysLog);
+            UpdateContext(context);
         }
 
         public override void Dispose()

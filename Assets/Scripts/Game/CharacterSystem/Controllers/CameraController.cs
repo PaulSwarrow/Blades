@@ -52,5 +52,11 @@ namespace CharacterSystem
         public override void Dispose()
         {
         }
+
+        public Vector3 TransformVector(Vector3 move)
+        {
+            return Quaternion.Euler(0, Camera.main.transform.rotation.eulerAngles.y, 0) * move;
+
+        }
     }
 }

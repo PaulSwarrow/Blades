@@ -20,7 +20,7 @@ MonoBehaviour:
     physics:
       grounded: 1
     cameraMode: 0
---- !u!114 &3027487811760989130
+--- !u!114 &2776002261103720290
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -32,6 +32,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7de6708b025a49a38130db89a51b4ac3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2731199856228709746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4594878443218351853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1bb524a6a6ef9241840ce41ee20d758, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blindZone: 0
+  angularVelocity: 2
+  accurancy: 0.1
+  rotating: 0
 --- !u!1001 &4594878443218317389
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41,7 +57,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 5efe43791f2d1af438df95d2e47c75de, type: 3}
       propertyPath: m_Name
-      value: Beta
+      value: Beta Variant
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5efe43791f2d1af438df95d2e47c75de, type: 3}
       propertyPath: m_LocalPosition.x

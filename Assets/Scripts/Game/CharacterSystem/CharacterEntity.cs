@@ -1,4 +1,5 @@
 using CharacterSystem.Data;
+using CharacterSystem.Interfaces;
 using UnityEngine;
 
 namespace CharacterSystem
@@ -6,18 +7,22 @@ namespace CharacterSystem
     public class CharacterEntity : MonoBehaviour
     {
         public CharacterContext context;
-        private CharacterAnimator animator;
+        private GenericMap<BaseCharacterComponent> components;
         public object body;
 
         private void Awake()
         {
-            animator = GetComponent<CharacterAnimator>();
-            animator.ApplyContext(context);
+            components = new GenericMap<BaseCharacterComponent>();
+            foreach (var component in GetComponents<BaseCharacterComponent>())
+            {
+                component.ApplyContext(context);
+                components.Set(component);
+            }
         }
 
         public Transform GetBone(HumanBodyBones boneId)
         {
-            return animator.GetBone(boneId);
+            return components.Get<CharacterAnimator>().GetBone(boneId);
         }
     }
 }

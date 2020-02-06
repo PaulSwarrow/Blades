@@ -6,8 +6,9 @@ namespace CharacterSystem.Data
     [Serializable]
     public struct CharacterInput
     {
-        public Vector2 Move;
+        public Vector3 Move;
         public bool JumpTrigger;
         public int AnimationTrigger;
+        public Vector3 LookDrirection;
     }
 }

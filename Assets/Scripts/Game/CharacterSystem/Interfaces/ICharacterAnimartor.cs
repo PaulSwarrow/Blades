@@ -1,10 +1,16 @@
 using CharacterSystem.Data;
+using UnityEngine;
 
 namespace CharacterSystem.Interfaces
 {
-    public interface ICharacterAnimator
+    public abstract class BaseCharacterComponent : MonoBehaviour
     {
-        void ApplyContext(CharacterContext context);
+        protected CharacterContext context { get; private set; }
+
+        public void ApplyContext(CharacterContext context)
+        {
+            this.context = context;
+        }
         
     }
 }

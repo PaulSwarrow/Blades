@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CharacterSystem
 {
-    public class CharacterAnimator : MonoBehaviour, ICharacterAnimator
+    public class CharacterAnimator : BaseCharacterComponent
     {
         public static readonly int ForceAttack = Animator.StringToHash("ForceAttack");
         private static readonly int Forward = Animator.StringToHash("forward");
@@ -13,7 +13,6 @@ namespace CharacterSystem
         private static readonly int Walk = Animator.StringToHash("walk");
         
         private Animator animator;
-        private CharacterContext context;
         private int animationTrigger;
 
         private void Awake()
@@ -23,19 +22,14 @@ namespace CharacterSystem
 
         public Transform GetBone(HumanBodyBones boneId)
         {
-            return animator.GetBoneTransform(HumanBodyBones.Neck);
+            return animator.GetBoneTransform(boneId);
         }
 
-
-        public void ApplyContext(CharacterContext context)
-        {
-            this.context = context;
-        }
 
         private void Update()
         {
             animationTrigger = -1;
-            animator.SetFloat(Forward, context.input.Move.y);
+            animator.SetFloat(Forward, context.input.Move.z);
             animator.SetFloat(Strafe, context.input.Move.x);
             animator.SetBool(Grounded, context.physics.grounded);
             animator.SetBool(Walk, context.input.Move.magnitude > 0);
